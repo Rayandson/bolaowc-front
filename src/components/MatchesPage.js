@@ -2,7 +2,7 @@ import styled from "styled-components";
 import NavBar from "./NavBar";
 
 
-export default function Matches() {
+export default function MatchesPage() {
     return(
         <>
         <Container>

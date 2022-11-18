@@ -1,19 +1,39 @@
+import axios from "axios"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SignUp() {
+export default function SignInPage() {
+
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const navigate = useNavigate();
+
+    function signIn(e) {
+        axios.post("https://bolaowc-api.onrender.com/sign-in", {username, password})
+        .then((res) => {
+        console.log(res)
+        navigate("/groups")
+        setUsername("")
+        setPassword("")
+        })
+        .catch((err) => {
+            alert(err.message)
+        })
+        e.preventDefault();
+    }
+
     return(
         <>
         <Container>
         <Logo>BOLÃO WC</Logo>
-        <h2>Criar sua Conta</h2>
-        <StyledForm>
-        <StyledInput placeholder="Primeiro nome"/>
-        <StyledInput placeholder="Username"/>
-        <StyledInput type="email" placeholder="Email"/>
-        <StyledInput type="password" placeholder="Senha"/>
-        <Botao type="submit" value="Cadastrar" />
+        <h2>Bem-vindo, entre agora!</h2>
+        <StyledForm onSubmit={signIn}>
+        <StyledInput placeholder="Username" onChange={(e) => setUsername(e.target.value)} value={username}/>
+        <StyledInput type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password}/>
+        <Botao type="submit" value="Entrar" />
         </StyledForm>
-        <p>Já possui uma conta ? <span>Entrar</span></p>
+        <p>Ainda não possui uma conta ? <Link to="/sign-up"><span>Cadastrar</span></Link></p>
         
         </Container>
         </>
@@ -45,6 +65,13 @@ background-color: #240441;
         span {
             color:#008ffc;
         }
+        a {
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        color: #fff;
+        }       
     }
    
 `
@@ -72,9 +99,9 @@ const StyledInput = styled.input`
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     outline: none;
-    padding-left: 8px;
+    padding-left: 14px;
         &::placeholder {
-            color: grey;
+            color: #afaeae;
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
 
@@ -94,4 +121,5 @@ const Botao = styled.input`
     margin-top: 20px;
     background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
     background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    cursor: pointer;
 `

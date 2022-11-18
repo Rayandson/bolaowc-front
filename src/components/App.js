@@ -1,9 +1,10 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
-import Groups from "./Groups";
-import Matches from "./Matches";
-import SignUp from "./SignUp";
+import GroupsPage from "./GroupsPage";
+import MatchesPage from "./MatchesPage";
+import SignInPage from "./SignInPage";
+import SignUpPage from "./SignUpPage";
 
 function App() {
   return (
@@ -11,9 +12,10 @@ function App() {
     <GlobalStyle />
     <AppContainer>
       <Routes>
-        <Route path="/sign-up" element={<SignUp/>}/>
-        <Route path="/matches" element={<Matches/>}/>
-        <Route path="/groups" element={<Groups/>}/>
+        <Route path="/sign-up" element={<SignUpPage/>}/>
+        <Route path="/sign-in" element={<SignInPage/>}/>
+        <Route path="/matches" element={<MatchesPage/>}/>
+        <Route path="/groups" element={<GroupsPage/>}/>
       </Routes>
     </AppContainer>
     </BrowserRouter>

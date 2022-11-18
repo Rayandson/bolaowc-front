@@ -4,7 +4,7 @@ import Group from "./Group"
 import Logo from "../assets/img/worldcup.png"
 
 
-export default function Groups() {
+export default function GroupsPage() {
     return(
         <>
         <Container>
