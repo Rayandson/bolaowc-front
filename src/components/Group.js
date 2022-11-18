@@ -1,29 +1,22 @@
 import styled from "styled-components"
 
 
-export default function Groups() {
+export default function Groups({group}) {
     return (
         <GroupContainer>
             <TitleContainer>
-                <h1>Grupo A</h1>
+                <h1>Grupo {group.group}</h1>
             </TitleContainer>
             <TeamsContainer>
+            {group.countries.map((country) => {
+                return(
                 <TeamContainer>
-                    <img src="https://aux.iconspalace.com/uploads/1967713405.png"/>
-                    <p>Brasil</p>
+                    <img src={country.flag}/>
+                    <p>{country.country}</p>
                 </TeamContainer>
-                <TeamContainer>
-                    <img src="https://aux.iconspalace.com/uploads/1922419712.png"/>
-                    <p>Brasil</p>
-                </TeamContainer>
-                <TeamContainer>
-                    <img src="https://aux2.iconspalace.com/uploads/378472002.png"/>
-                    <p>Brasil</p>
-                </TeamContainer>
-                <TeamContainer>
-                    <img src="https://aux.iconspalace.com/uploads/1210740017.png"/>
-                    <p>Brasil</p>
-                </TeamContainer>
+                )
+            })}
+                
             </TeamsContainer>
         </GroupContainer>
     )
@@ -58,17 +51,18 @@ const TeamsContainer = styled.div`
 width: 100%;
 display: flex;
 flex-direction: column;
+align-items: center;
 /* border: solid 1px black; */
 border-radius: 0 0 10px 10px;
 `
 
 const TeamContainer = styled.div`
-    width: 100%;
+    width: 80%;
     height: 30px;
     color: #6B1933;
     font-weight: 700;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     img {
         width: 25px;

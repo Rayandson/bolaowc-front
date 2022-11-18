@@ -1,8 +1,12 @@
 import styled from "styled-components"
 import "../style/icons.css"
 import { BiUser } from "react-icons/bi";
+import { UserContext } from "../contexts/UserContext"
+import { useContext } from "react";
 
 export default function NavBar() {
+    const {user} = useContext(UserContext)
+
     return (
         <>
         <Header>
@@ -14,7 +18,7 @@ export default function NavBar() {
                 <li>RANKING</li>
             </MenuContainer>
             <UserContainer>
-                <p>Olá, Rayandson</p>
+                <p>Olá, {user.name}</p>
                 <BiUser className="user-icon"></BiUser>  
             </UserContainer>
         </Header>

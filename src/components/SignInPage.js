@@ -1,21 +1,24 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { UserContext } from "../contexts/UserContext"
+
 
 export default function SignInPage() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate();
 
     function signIn(e) {
         axios.post("https://bolaowc-api.onrender.com/sign-in", {username, password})
         .then((res) => {
-        console.log(res)
         navigate("/groups")
         setUsername("")
         setPassword("")
+        setUser(res.data)
         })
         .catch((err) => {
             alert(err.message)

@@ -14,7 +14,7 @@ export default function SignUpPage() {
         axios.post("https://bolaowc-api.onrender.com/sign-up", {name, username, email, password})
         .then((res) => {
         console.log(res)
-        navigate("/sign-in")
+        navigate("/")
         setName("")
         setUsername("")
         setEmail("")
