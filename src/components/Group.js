@@ -60,7 +60,8 @@ const TeamContainer = styled.div`
     width: 80%;
     height: 30px;
     color: #6B1933;
-    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
     display: flex;
     justify-content: space-between;
     align-items: center;

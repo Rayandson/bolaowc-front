@@ -3,27 +3,34 @@ import "../style/icons.css"
 import { BiUser } from "react-icons/bi";
 import { UserContext } from "../contexts/UserContext"
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
     const {user} = useContext(UserContext)
+    const navigate = useNavigate()
 
-    return (
-        <>
-        <Header>
-            <Logo>BOLÃO WC</Logo>
-            <MenuContainer>
-                <li>GRUPOS</li>
-                <li>JOGOS</li>
-                <li>PALPITES</li>
-                <li>RANKING</li>
-            </MenuContainer>
-            <UserContainer>
-                <p>Olá, {user.name}</p>
-                <BiUser className="user-icon"></BiUser>  
-            </UserContainer>
-        </Header>
-        </>
-    )
+    function redirect(route) {
+        navigate(route)
+    }
+
+        return (
+            <>
+            <Header>
+                <Logo onClick={() => redirect("/")}>BOLÃO WC</Logo>
+                <MenuContainer>
+                    <li onClick={() => redirect("/groups")}>GRUPOS</li>
+                    <li onClick={() => redirect("/matches")}>CALENDÁRIO</li>
+                    <li onClick={() => redirect("/guesses")}>PALPITES</li>
+                    <li>RANKING</li>
+                </MenuContainer>
+                <UserContainer>
+                    <p>Olá, {user?.name}</p>
+                    <BiUser className="user-icon"></BiUser>  
+                </UserContainer>
+            </Header>
+            </>
+        )
+    
 }
 
 const Header = styled.header`
@@ -34,6 +41,7 @@ const Header = styled.header`
     position: fixed;
     left: 0;
     top: 0;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,5 +77,8 @@ const MenuContainer = styled.ul`
     color: #fff;
     li:first-child {
         color: #D1BC6C;
+    }
+    li {
+        cursor: pointer;
     }
 `

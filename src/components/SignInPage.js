@@ -122,7 +122,7 @@ const Botao = styled.input`
     font-weight: 500;
     outline: none;
     margin-top: 20px;
-    background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+    /* background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%); */
     background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
     cursor: pointer;
 `

@@ -5,18 +5,20 @@ import Logo from "../assets/img/worldcup.png"
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext"
 import axios from "axios";
-
+import { Link, useNavigate} from "react-router-dom";
 
 export default function GroupsPage() {
     const [groups, setGroups] = useState(undefined)
     const {user} = useContext(UserContext)
-    console.log(user)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get("https://bolaowc-api.onrender.com/groups", {headers: {username: user.username}})
+        if(!user) {
+            navigate("/")
+        }
+        axios.get("https://bolaowc-api.onrender.com/groups", {headers: {username: user?.username}})
         .then((res) => {
             setGroups(res.data)
-            console.log(res.data)
         })
         .catch((err) => {
             console.log(err)
@@ -51,7 +53,7 @@ export default function GroupsPage() {
 const Container = styled.div`
     min-height: calc(100vh - 58px);
     margin-top: 58px;
-    background-color: #EEEEE4;
+    background-color: #1b0530;;
     padding: 70px 20px;
     display: flex;
    justify-content: center;

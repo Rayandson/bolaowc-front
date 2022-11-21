@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { UserContextProvider } from "../contexts/UserContext";
 import GlobalStyle from "./GlobalStyle";
 import GroupsPage from "./GroupsPage";
+import GuessesPage from "./GuessesPage";
 import MatchesPage from "./MatchesPage";
 import SignInPage from "./SignInPage";
 import SignUpPage from "./SignUpPage";
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<SignInPage/>}/>
         <Route path="/matches" element={<MatchesPage/>}/>
         <Route path="/groups" element={<GroupsPage/>}/>
+        <Route path="/guesses" element={<GuessesPage/>}/>
       </Routes>
       </UserContextProvider>
     </AppContainer>
