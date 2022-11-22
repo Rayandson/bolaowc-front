@@ -19,7 +19,7 @@ export default function NavBar() {
                 <Logo onClick={() => redirect("/")}>BOLÃO WC</Logo>
                 <MenuContainer>
                     <li onClick={() => redirect("/groups")}>GRUPOS</li>
-                    <li onClick={() => redirect("/matches")}>CALENDÁRIO</li>
+                    <li onClick={() => redirect("/matches")}>JOGOS</li>
                     <li onClick={() => redirect("/guesses")}>PALPITES</li>
                     <li>RANKING</li>
                 </MenuContainer>
@@ -28,6 +28,13 @@ export default function NavBar() {
                     <BiUser className="user-icon"></BiUser>  
                 </UserContainer>
             </Header>
+            
+            <HeaderMobile>
+                <Logo onClick={() => redirect("/")}>BOLÃO WC</Logo> 
+                <UserContainer>
+                    <BiUser className="user-icon"></BiUser>  
+                </UserContainer>
+            </HeaderMobile>
             </>
         )
     
@@ -36,7 +43,6 @@ export default function NavBar() {
 const Header = styled.header`
     width: 100%;
     height: 58px;
-    /* background-color: #A72032; */
     background-color: #460A65;
     position: fixed;
     left: 0;
@@ -46,7 +52,29 @@ const Header = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
+    @media (max-width: 680px) {
+        display: none;
+    }
 `
+
+const HeaderMobile = styled.header`
+    width: 100%;
+    height: 53px;
+    background-color: #460A65;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    display: none;
+    @media (max-width: 680px) {
+        display: flex;
+    }
+`
+
 const Logo = styled.h1`
     color: #FFF;
     font-family: 'Pattaya', sans-serif;

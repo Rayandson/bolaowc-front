@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/UserContext"
 import axios from "axios";
 import { Link, useNavigate} from "react-router-dom";
+import Footer from "./Footer";
 
 export default function GroupsPage() {
     const [groups, setGroups] = useState(undefined)
@@ -43,7 +44,7 @@ export default function GroupsPage() {
                 <LogoContainer>
                 <img src={Logo}></img>
                 </LogoContainer>
-                
+                <Footer />
             </Container>
     
         )
@@ -59,21 +60,35 @@ const Container = styled.div`
    justify-content: center;
    align-items: center;
    gap: 60px;
+   @media(max-width: 680px) {
+        padding: 60px 0;
+        margin-top: 53px;
+        min-height: calc(100vh - 53px);
+    }
 `
 
 const GroupsContainer = styled.div`
     width: 70vw;
     height: 400px;
-    /* background-color: orange; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    @media(max-width: 680px) {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        gap: 25px;
+        justify-content: center;
+    }
 `
 
 const LogoContainer = styled.div`
  img {
         width: 250px;
         height: 250px;
+    }
+    @media(max-width: 680px) {
+        display: none;
     }
 `

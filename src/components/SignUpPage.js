@@ -38,7 +38,7 @@ export default function SignUpPage() {
         <StyledInput type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password}/>
         <Botao type="submit" value="Cadastrar" />
         </StyledForm>
-        <p>Já possui uma conta ? <Link to="/sign-in"><span>Entrar</span></Link></p>
+        <p>Já possui uma conta ? <Link to="/"><span>Entrar</span></Link></p>
         
         </Container>
         </>
@@ -91,7 +91,9 @@ const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 15px;
-            
+    @media(max-width: 385px) {
+        width: 90%;
+    }    
 `
 
 const StyledInput = styled.input`
@@ -111,6 +113,9 @@ const StyledInput = styled.input`
             font-weight: 500;
 
         }
+        @media(max-width: 385px) {
+        width: 100%;
+    }
 `
 
 const Botao = styled.input`
@@ -126,4 +131,7 @@ const Botao = styled.input`
     background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
     background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
     cursor: pointer;
+    @media(max-width: 385px) {
+        width: 100%;
+    }
 `

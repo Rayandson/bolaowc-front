@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
+import Footer from "./Footer";
 import GuessesContainer from "./GuessesContainer";
 import NavBar from "./NavBar";
 
@@ -16,7 +17,7 @@ export default function GuessesPage() {
             // console.log(res.data.matches.matchesTable)
             setMatches(res.data.matches.matchesTable)
             setguesses(res.data.guesses)  
-        }). catch ((err) => {
+        }).catch ((err) => {
             // alert(err.message)
         })
     }, [])
@@ -53,6 +54,7 @@ export default function GuessesPage() {
                 <Guess /> */}
                 </MatchesContainer>
             </Content>
+            <Footer />
         </Container>
     )
 }
@@ -60,11 +62,13 @@ export default function GuessesPage() {
 const Container = styled.div`
     min-height: calc(100vh - 58px);
     margin-top: 58px;
-    background-color: #EEEEE4;
-    background-color: #240441;
     background-color: #1b0530;
     display: flex;
     justify-content: center;
+    @media(max-width: 680px) {
+        margin-top: 53px;
+        min-height: calc(100vh - 53px);
+    }
 `
 
 const Content = styled.div`
@@ -75,6 +79,9 @@ const Content = styled.div`
     align-items: center;
     padding: 35px 0;
     gap: 20px;
+    @media(max-width: 680px) {
+        width: 88%;
+    }
 `
 
 const Title = styled.h1`
@@ -109,4 +116,7 @@ const MatchesContainer = styled.div`
     padding: 10px;
     gap: 40px;
     border-radius: 8px;
+    @media(max-width: 680px) {
+        width: 100%;
+    }
 `

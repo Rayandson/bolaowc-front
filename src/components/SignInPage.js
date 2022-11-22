@@ -3,22 +3,25 @@ import { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { UserContext } from "../contexts/UserContext"
-
+import { ThreeDots  } from  'react-loader-spinner'
 
 export default function SignInPage() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const {user, setUser} = useContext(UserContext)
+    const [loading, setLoading] = useState(false)
+    const {setUser} = useContext(UserContext)
     const navigate = useNavigate();
 
     function signIn(e) {
+        setLoading(true)
         axios.post("https://bolaowc-api.onrender.com/sign-in", {username, password})
         .then((res) => {
         navigate("/groups")
         setUsername("")
         setPassword("")
         setUser(res.data)
+        console.log(res.data)
         })
         .catch((err) => {
             alert(err.message)
@@ -31,10 +34,22 @@ export default function SignInPage() {
         <Container>
         <Logo>BOLÃO WC</Logo>
         <h2>Bem-vindo, entre agora!</h2>
-        <StyledForm onSubmit={signIn}>
+        <StyledForm>
         <StyledInput placeholder="Username" onChange={(e) => setUsername(e.target.value)} value={username}/>
         <StyledInput type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password}/>
-        <Botao type="submit" value="Entrar" />
+        <Botao loading={loading} onClick={signIn}>
+            <h3>Entrar</h3>
+            <div><ThreeDots 
+            height="28" 
+            width="28" 
+            radius="9"
+            color="#FFF" 
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+            /></div>    
+        </Botao>
         </StyledForm>
         <p>Ainda não possui uma conta ? <Link to="/sign-up"><span>Cadastrar</span></Link></p>
         
@@ -89,7 +104,9 @@ const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 15px;
-            
+     @media(max-width: 385px) {
+        width: 90%;
+    }
 `
 
 const StyledInput = styled.input`
@@ -109,9 +126,12 @@ const StyledInput = styled.input`
             font-weight: 500;
 
         }
+    @media(max-width: 385px) {
+        width: 100%;
+    }
 `
 
-const Botao = styled.input`
+const Botao = styled.button`
     width: 370px;
     height: 40px;
     /* border: solid 2px #908E97; */
@@ -125,4 +145,17 @@ const Botao = styled.input`
     /* background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%); */
     background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
     cursor: pointer;
+    h3 {
+        display: ${props => props.loading === true ? "none" : "initial"}
+    }
+
+    div {
+        display: ${props => props.loading === true ? "flex" : "none"};
+        justify-content: center;
+        align-items: center;
+
+    }
+    @media(max-width: 385px) {
+        width: 100%;
+    }
 `

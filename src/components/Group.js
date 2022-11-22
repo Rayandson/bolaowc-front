@@ -28,8 +28,11 @@ const GroupContainer = styled.div`
    background-color: #FFFFFF;
    display: flex;
    flex-direction: column;
-   
    border-radius: 10px;
+   @media(max-width: 450px) {
+        width: 80%;
+        height: 200px;
+    }
 `
 const TitleContainer = styled.div`
     width: 100%;
@@ -54,6 +57,9 @@ flex-direction: column;
 align-items: center;
 /* border: solid 1px black; */
 border-radius: 0 0 10px 10px;
+@media(max-width: 680px) {
+        height: 80%;
+    }
 `
 
 const TeamContainer = styled.div`
@@ -67,5 +73,8 @@ const TeamContainer = styled.div`
     align-items: center;
     img {
         width: 25px;
+    }
+    @media(max-width: 450px) {
+        height: 25%;
     }
 `

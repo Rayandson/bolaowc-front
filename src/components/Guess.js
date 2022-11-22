@@ -1,13 +1,20 @@
-import { useEffect, useState } from "react"
+import axios from "axios"
+import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
+import { UserContext } from "../contexts/UserContext"
 
 export default function Guess(props) {
     const matchName = props.matchInfo.match
+    // console.log(props.matchInfo)
     const matchInfo = props.matchInfo
     const guesses = props.guesses
+    const {user} = useContext(UserContext)
     const [guessExists, setGuessExists] = useState(false)
     const [guessTeamA, setGuessTeamA] = useState("")
     const [guessTeamB, setGuessTeamB] = useState("")
+    const [teamAInput, setTeamAInput] = useState("")
+    const [teamBInput, setTeamBInput] = useState("")
+    const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
         for(let i=0; i<guesses.length; i++) {
@@ -22,10 +29,19 @@ export default function Guess(props) {
     
     }, [])
 
+    function sendGuess() {
+        setDisabled(true)
+        axios.post("https://bolaowc-api.onrender.com/guesses", {username: user.username, matches:[{match: matchName, teamA: {country: props.matchInfo.teamA.country, score: Number(teamAInput)}, teamB:{country: props.matchInfo.teamB.country, score: Number(teamBInput)}}]}, {headers: {username: user.username}})
+        .then((res) => {
+            console.log(res.data)
+        }).catch((e) => {
+            alert(e.message)
+        })
+    }
+
     if(guessExists === false) {
         return(
             <MatchContainer>
-    
                 <Content>
                 <Time>{matchInfo.time}</Time>
                 <TeamsContainer>
@@ -51,12 +67,12 @@ export default function Guess(props) {
                 <Palpite>
                 <h2>Palpite:</h2>
                 </Palpite>
-                <ScoreInput type="number"/>
+                <ScoreInput type="number" onChange={(e) => setTeamAInput(e.target.value)} value={teamAInput}/>
                 <Vs>X</Vs>
-                <ScoreInput type="number"/>
+                <ScoreInput type="number" onChange={(e) => setTeamBInput(e.target.value)} value={teamBInput}/>
                 <TeamBDiv />
                 </GuessDiv>
-                <Botao>Enviar</Botao>
+                <Botao disabled={disabled} teamAInput={teamAInput} teamBInput={teamBInput} onClick={sendGuess}>Enviar</Botao>
             </MatchContainer>
         )
     }
@@ -64,7 +80,7 @@ export default function Guess(props) {
         
     return(
         <MatchContainer>
-
+            <TimeMobile>{matchInfo.time}</TimeMobile>
             <Content>
             <Time>{matchInfo.time}</Time>
             <TeamsContainer>
@@ -128,6 +144,7 @@ const TeamADiv =styled.div`
     justify-content: flex-end;
     align-items: center;
     gap: 5px;
+    font-size: 16px;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     img {
@@ -138,7 +155,6 @@ const TeamADiv =styled.div`
 const Palpite = styled.div`
     width: 150px;
     height: 30px;
-    /* background-color: orange; */
     display: flex;
     justify-content: center;
     color: green;
@@ -155,6 +171,7 @@ const TeamBDiv =styled.div`
     align-items: center;
     gap: 5px;
     font-family: 'Roboto', sans-serif;
+    font-size: 16px;
     font-weight: 500;
     img {
         width: 22px;
@@ -164,7 +181,6 @@ const TeamBDiv =styled.div`
 const Content =styled.div`
     width: 95%;
     height: 30px;
-    /* background-color: red; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -175,13 +191,15 @@ const TeamsContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: blue; */
+    @media (max-width: 400px) {
+        width: 100%;
+    }
 `
 
 const Score = styled.div`
     width: 25px;
     height: 25px;
-    background-color: #FFF;
+    background-color: #FAFAFA;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,7 +218,21 @@ const Time = styled.p`
     position: absolute;
     left: 10px;
     top: 8px;
+    @media(max-width: 680px) {
+        display: none;
+    }
 `
+const TimeMobile = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    display: none;
+    margin-bottom: 15px;
+    @media(max-width: 680px) {
+        display: block;
+    }
+`
+
 const Stadium = styled.p`
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -208,6 +240,9 @@ const Stadium = styled.p`
     position: absolute;
     right: 10px;
     top: 8px;
+    @media(max-width: 680px) {
+        display: none;
+    }
 `
 
 const GuessDiv = styled.div`
@@ -234,8 +269,10 @@ const Botao = styled.button`
 width: 60px;
 height: 25px;
 border-radius: 5px;
-background-color: purple;
+/* background-color: purple; */
+background-color:  ${props => (props.disabled === false) ? "purple" : "grey"};
 margin-top: 15px;
 border: none;
 color: #fff;
+pointer-events: ${props => (props.disabled === true || (props.teamAInput === "" || props.teamBInput === "")) ? "none" : "all"};
 `

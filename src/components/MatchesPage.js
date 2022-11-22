@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Footer from "./Footer";
 import Match from "./Match";
 import NavBar from "./NavBar";
 
@@ -11,6 +12,7 @@ export default function MatchesPage() {
                 <Title>1ª rodada</Title>
                 <Match />
             </Content>
+            <Footer />
         </Container>
     )
 }
@@ -21,6 +23,10 @@ const Container = styled.div`
     background-color: #1b0530;
     display: flex;
     justify-content: center;
+    @media(max-width: 680px) {
+        margin-top: 53px;
+        min-height: calc(100vh - 53px);
+    }
 `
 
 const Content = styled.div`
