@@ -5,6 +5,7 @@ import GlobalStyle from "./GlobalStyle";
 import GroupsPage from "./GroupsPage";
 import GuessesPage from "./GuessesPage";
 import MatchesPage from "./MatchesPage";
+import RankingPage from "./RankingPage";
 import SignInPage from "./SignInPage";
 import SignUpPage from "./SignUpPage";
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/matches" element={<MatchesPage/>}/>
         <Route path="/groups" element={<GroupsPage/>}/>
         <Route path="/guesses" element={<GuessesPage/>}/>
+        <Route path="/ranking" element={<RankingPage/>}/>
       </Routes>
       </UserContextProvider>
     </AppContainer>

@@ -23,7 +23,7 @@ export default function Footer() {
                     <li onClick={() => redirect("/groups")}><FaTable className="white-table"/></li>
                     <li onClick={() => redirect("/matches")}><TbSoccerField className="white-field"/></li>
                     <li onClick={() => redirect("/guesses")}><HiShieldCheck className="white-shield"/></li>
-                    <li><FaMedal className="medal-icon"/></li>
+                    <li onClick={() => redirect("/ranking")}><FaMedal className="medal-icon"/></li>
                 </MenuContainer>
             </StyledFooter>
             </>

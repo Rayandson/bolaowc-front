@@ -21,7 +21,7 @@ export default function NavBar() {
                     <li onClick={() => redirect("/groups")}>GRUPOS</li>
                     <li onClick={() => redirect("/matches")}>JOGOS</li>
                     <li onClick={() => redirect("/guesses")}>PALPITES</li>
-                    <li>RANKING</li>
+                    <li onClick={() => redirect("/ranking")}>RANKING</li>
                 </MenuContainer>
                 <UserContainer>
                     <p>Olá, {user?.name}</p>
