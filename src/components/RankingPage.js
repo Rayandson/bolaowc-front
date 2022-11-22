@@ -143,6 +143,9 @@ const Content = styled.div`
     align-items: center;
     padding: 35px 0;
     gap: 20px;
+    @media (max-width: 600px) {
+    width: 90%;
+}
 `
 
 const Title = styled.h1`
@@ -159,7 +162,12 @@ height: auto;
 display: flex;
 justify-content: space-between;
 align-items: flex-start;
-/* background-color: orange; */
+
+@media (max-width: 600px) {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
 `
 const RankingContainer = styled.div`
     width: 500px;
@@ -170,6 +178,9 @@ const RankingContainer = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 10px;
+    @media (max-width: 600px) {
+    width: 95%;
+}
 `
 
 const TableHeader = styled.div`
@@ -186,7 +197,7 @@ font-size: 15px;
 `
 
 const TableLine = styled.div`
-width: 90%;
+width: 100%;
 height: 44px;
 display: flex;
 justify-content: space-between;
@@ -220,6 +231,10 @@ const RulesContainer = styled.div`
     width: 500px;
     min-height: 300px;
     background-color: #FAFAFA;
+    @media (max-width: 600px) {
+    width: 100%;
+    margin-bottom: 80px;
+}
 `
 
 const RulesTitle = styled.div`
