@@ -146,7 +146,8 @@ const Botao = styled.button`
     background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
     cursor: pointer;
     h3 {
-        display: ${props => props.loading === true ? "none" : "initial"}
+        display: ${props => props.loading === true ? "none" : "initial"};
+        font-size: 16px;
     }
 
     div {

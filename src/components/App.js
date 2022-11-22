@@ -1,5 +1,6 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import styled from "styled-components";
+import { ActiveContextProvider } from "../contexts/ActiveContext";
 import { UserContextProvider } from "../contexts/UserContext";
 import GlobalStyle from "./GlobalStyle";
 import GroupsPage from "./GroupsPage";
@@ -15,6 +16,7 @@ function App() {
     <GlobalStyle />
     <AppContainer>
     <UserContextProvider>
+      <ActiveContextProvider>
       <Routes>
         <Route path="/sign-up" element={<SignUpPage/>}/>
         <Route path="/" element={<SignInPage/>}/>
@@ -23,6 +25,7 @@ function App() {
         <Route path="/guesses" element={<GuessesPage/>}/>
         <Route path="/ranking" element={<RankingPage/>}/>
       </Routes>
+      </ActiveContextProvider>
       </UserContextProvider>
     </AppContainer>
     </BrowserRouter>

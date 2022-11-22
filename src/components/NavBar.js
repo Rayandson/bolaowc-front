@@ -2,15 +2,19 @@ import styled from "styled-components"
 import "../style/icons.css"
 import { BiUser } from "react-icons/bi";
 import { UserContext } from "../contexts/UserContext"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ActiveContext } from "../contexts/ActiveContext";
 
 export default function NavBar() {
     const {user} = useContext(UserContext)
     const navigate = useNavigate()
+    const {active, setActive} = useContext(ActiveContext)
 
-    function redirect(route) {
+    function redirect(route, tab) {
         navigate(route)
+        console.log(typeof(tab))
+        setActive(tab)
     }
 
         return (
@@ -18,10 +22,10 @@ export default function NavBar() {
             <Header>
                 <Logo onClick={() => redirect("/")}>BOLÃO WC</Logo>
                 <MenuContainer>
-                    <li onClick={() => redirect("/groups")}>GRUPOS</li>
-                    <li onClick={() => redirect("/matches")}>JOGOS</li>
-                    <li onClick={() => redirect("/guesses")}>PALPITES</li>
-                    <li onClick={() => redirect("/ranking")}>RANKING</li>
+                    <GroupsLi active={active} onClick={() => redirect("/groups", "groups")}>GRUPOS</GroupsLi>
+                    <MatchesLi active={active} onClick={() => redirect("/matches", "matches")}>JOGOS</MatchesLi>
+                    <GuessesLi active={active} onClick={() => redirect("/guesses", "guesses")}>PALPITES</GuessesLi>
+                    <RankingLi active={active} onClick={() => redirect("/ranking", "ranking")}>RANKING</RankingLi>
                 </MenuContainer>
                 <UserContainer>
                     <p>Olá, {user?.name}</p>
@@ -102,11 +106,21 @@ const MenuContainer = styled.ul`
     gap: 60px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    color: #fff;
-    li:first-child {
-        color: #D1BC6C;
-    }
     li {
         cursor: pointer;
     }
+`
+
+const GroupsLi = styled.li`
+    color: ${props => props.active === "groups" ? "#D1BC6C" : "#FFF"};
+`
+
+const MatchesLi = styled.li`
+    color: ${props => props.active === "matches" ? "#D1BC6C" : "#FFF"};
+`
+const GuessesLi = styled.li`
+    color: ${props => props.active === "guesses" ? "#D1BC6C" : "#FFF"};
+`
+const RankingLi = styled.li`
+    color: ${props => props.active === "ranking" ? "#D1BC6C" : "#FFF"};
 `

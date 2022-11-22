@@ -29,6 +29,12 @@ export default function Guess(props) {
     
     }, [])
 
+    // setInterval(desativaBotao, 100000)
+
+    // function desativaBotao() {
+    //     setDisabled(true)
+    // }
+
     function sendGuess() {
         setDisabled(true)
         axios.post("https://bolaowc-api.onrender.com/guesses", {username: user.username, matches:[{match: matchName, teamA: {country: props.matchInfo.teamA.country, score: Number(teamAInput)}, teamB:{country: props.matchInfo.teamB.country, score: Number(teamBInput)}}]}, {headers: {username: user.username}})
@@ -263,6 +269,11 @@ const ScoreInput = styled.input`
     display: flex;
     justify-content: center;
     text-align: center;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 `
 
 const Botao = styled.button`
