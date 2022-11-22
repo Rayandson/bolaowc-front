@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
 import Footer from "./Footer";
@@ -9,20 +10,24 @@ import NavBar from "./NavBar";
 export default function RankingPage() {
     const {user} = useContext(UserContext)
     const [ranking, setranking] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get("https://bolaowc-api.onrender.com/ranking", {headers: {username: user?.username}})
         .then((res) => {
             console.log(res.data[0].ranking)
             setranking(res.data[0].ranking)
-        }).catch ((e) => alert(e.message))
+        }).catch ((e) => {
+            alert(e.message)
+            navigate("/")
+        })
     }, [])
 
     if(ranking.length === 0) {
         return(
             <Container>
             <NavBar />
-            <p> Carregando</p>
+            <LoadingMessage> Carregando...</LoadingMessage>
             <Footer />
             </Container>
         )
@@ -123,6 +128,7 @@ const Container = styled.div`
     background-color: #1b0530;
     display: flex;
     justify-content: center;
+    align-items: center;
     @media(max-width: 680px) {
         margin-top: 53px;
         min-height: calc(100vh - 53px);
@@ -264,4 +270,11 @@ const Pts = styled.div`
     font-size: 17px;
     color: #FFF;
     background-color: ${props => props.color === "green" ? "green" : props.color === "blue" ? "#0202d3" : props.color === "yellow" ? "black" : props.color === "orange" ? "#db8a00" : "#d80000" };
+`
+
+const LoadingMessage = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: #fff;
 `

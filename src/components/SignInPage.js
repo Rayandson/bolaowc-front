@@ -17,7 +17,7 @@ export default function SignInPage() {
         setLoading(true)
         axios.post("https://bolaowc-api.onrender.com/sign-in", {username, password})
         .then((res) => {
-        navigate("/groups")
+        navigate("/guesses")
         setUsername("")
         setPassword("")
         setUser(res.data)

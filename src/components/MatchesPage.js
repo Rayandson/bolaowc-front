@@ -9,7 +9,11 @@ export default function MatchesPage() {
         <Container>
             <NavBar />
             <Content>
-                <Title>1ª rodada</Title>
+                <Title>Em breve</Title>
+                <Match />
+                <Match />
+                <Match />
+                <Match />
                 <Match />
             </Content>
             <Footer />
@@ -43,4 +47,5 @@ const Title = styled.h1`
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 22px;
+    color: #fff;
 `

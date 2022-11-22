@@ -2,15 +2,18 @@ import axios from "axios"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { ThreeDots  } from  'react-loader-spinner'
 
 export default function SignUpPage() {
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     function signUp(e) {
+        setLoading(true)
         axios.post("https://bolaowc-api.onrender.com/sign-up", {name, username, email, password})
         .then((res) => {
         console.log(res)
@@ -22,6 +25,7 @@ export default function SignUpPage() {
         })
         .catch((err) => {
             alert(err.message)
+            navigate("/")
         })
         e.preventDefault();
     }
@@ -36,7 +40,19 @@ export default function SignUpPage() {
         <StyledInput placeholder="Username" onChange={(e) => setUsername(e.target.value)} value={username}/>
         <StyledInput type="email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} value={email}/>
         <StyledInput type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password}/>
-        <Botao type="submit" value="Cadastrar" />
+        <Botao loading={loading} onClick={signUp}>
+        <h3>Cadastrar</h3>
+            <div><ThreeDots 
+            height="28" 
+            width="28" 
+            radius="9"
+            color="#FFF" 
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+            /></div> 
+        </Botao>
         </StyledForm>
         <p>Já possui uma conta ? <Link to="/"><span>Entrar</span></Link></p>
         
@@ -118,7 +134,7 @@ const StyledInput = styled.input`
     }
 `
 
-const Botao = styled.input`
+const Botao = styled.button`
     width: 370px;
     height: 40px;
     border: none;
@@ -131,6 +147,17 @@ const Botao = styled.input`
     background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
     background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
     cursor: pointer;
+    h3 {
+        display: ${props => props.loading === true ? "none" : "initial"};
+        font-size: 16px;
+    }
+
+    div {
+        display: ${props => props.loading === true ? "flex" : "none"};
+        justify-content: center;
+        align-items: center;
+
+    }
     @media(max-width: 385px) {
         width: 100%;
     }

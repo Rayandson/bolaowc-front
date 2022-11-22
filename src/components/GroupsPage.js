@@ -30,7 +30,7 @@ export default function GroupsPage() {
         return(
             <Container>
                 <NavBar />
-                <h1>Carregando</h1>
+                <LoadingMessage>Carregando...</LoadingMessage>
             </Container>
         )
     } else {
@@ -65,6 +65,11 @@ const Container = styled.div`
         margin-top: 53px;
         min-height: calc(100vh - 53px);
     }
+`
+
+const LoadingMessage = styled.h1`
+    color: #fff;
+    font-size: 20px;
 `
 
 const GroupsContainer = styled.div`
