@@ -7,23 +7,26 @@ import { TbSoccerField } from "react-icons/tb";
 import { UserContext } from "../contexts/UserContext"
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ActiveContext } from "../contexts/ActiveContext";
 
 export default function Footer() {
     const {user} = useContext(UserContext)
     const navigate = useNavigate()
+    const {active, setActive} = useContext(ActiveContext)
 
-    function redirect(route) {
+    function redirect(route, tab) {
         navigate(route)
+        setActive(tab)
     }
 
         return (
             <>
             <StyledFooter>
                 <MenuContainer>
-                    <li onClick={() => redirect("/groups")}><FaTable className="white-table"/></li>
-                    <li onClick={() => redirect("/matches")}><TbSoccerField className="white-field"/></li>
-                    <li onClick={() => redirect("/guesses")}><HiShieldCheck className="white-shield"/></li>
-                    <li onClick={() => redirect("/ranking")}><FaMedal className="medal-icon"/></li>
+                    <li active={active} onClick={() => redirect("/groups", "groups")}><FaTable className={active === "groups" ? "table-active" : "table-inactive"} /></li>
+                    <li active={active} onClick={() => redirect("/matches", "matches")}><TbSoccerField className={active === "matches" ? "field-active" : "field-inactive"}/></li>
+                    <li active={active} onClick={() => redirect("/guesses", "guesses")}><HiShieldCheck className={active === "guesses" ? "shield-active" : "shield-inactive"}/></li>
+                    <li active={active} onClick={() => redirect("/ranking", "ranking")}><FaMedal className={active === "ranking" ? "medal-active" : "medal-inactive"}/></li>
                 </MenuContainer>
             </StyledFooter>
             </>
@@ -57,9 +60,6 @@ const MenuContainer = styled.ul`
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     width: 100%;
-    li:first-child {
-        color: #D1BC6C;
-    }
     li {
         cursor: pointer;
     }

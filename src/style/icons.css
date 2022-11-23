@@ -3,23 +3,43 @@
     color: #FFF;
 }
 
-.medal-icon {
+.medal-active {
     font-size: 21px;
     color: #FFF;
     /* color: #A7AEBE; */
 }
 
-.white-field {
+.medal-inactive {
+    font-size: 21px;
+    color: #A7AEBE;
+}
+
+.field-active {
+    font-size: 25px;
+    color: #FFF;
+}
+
+.field-inactive {
     font-size: 25px;
     color: #A7AEBE;
 }
 
-.white-shield {
+.shield-active {
+    font-size: 23px;
+    color: #FFF;
+}
+
+.shield-inactive {
     font-size: 23px;
     color: #A7AEBE;
 }
 
-.white-table {
+.table-active {
+    font-size: 21px;
+    color: #FFF;
+}
+
+.table-inactive {
     font-size: 21px;
     color: #A7AEBE;
 }

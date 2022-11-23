@@ -31,6 +31,7 @@ export default function GroupsPage() {
             <Container>
                 <NavBar />
                 <LoadingMessage>Carregando...</LoadingMessage>
+                <Footer />
             </Container>
         )
     } else {

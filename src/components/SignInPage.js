@@ -25,6 +25,7 @@ export default function SignInPage() {
         })
         .catch((err) => {
             alert(err.message)
+            setLoading(false)
         })
         e.preventDefault();
     }
@@ -105,7 +106,7 @@ const StyledForm = styled.form`
     flex-direction: column;
     gap: 15px;
      @media(max-width: 385px) {
-        width: 90%;
+        width: 85%;
     }
 `
 

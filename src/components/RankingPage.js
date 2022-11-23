@@ -290,6 +290,6 @@ const Pts = styled.div`
 const LoadingMessage = styled.p`
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 22px;
     color: #fff;
 `
