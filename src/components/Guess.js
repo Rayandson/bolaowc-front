@@ -2,8 +2,19 @@ import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import { UserContext } from "../contexts/UserContext"
+import dayjs from "dayjs"
 
 export default function Guess(props) {
+    const dayJsObject = dayjs()
+    const currentHour = Number(dayJsObject.format('HH'))
+    const today = dayJsObject.format('DD/MM')
+    const todayNumber = Number(dayJsObject.format('DD'))
+    const matchDay = Number(props.matchInfo.date.slice(0 ,2))
+    const currentMonth = Number(dayJsObject.format('MM'))
+    const matchMonth = Number(props.matchInfo.date.slice(3))
+    console.log(matchMonth)
+    const matchDate = props.matchInfo.date
+    const matchHour = Number(props.matchInfo.time.slice(0, 2))
     const matchName = props.matchInfo.match
     // console.log(props.matchInfo)
     const matchInfo = props.matchInfo
@@ -17,6 +28,7 @@ export default function Guess(props) {
     const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
+        matchStarted()
         for(let i=0; i<guesses.length; i++) {
             for(let j=0; j<guesses[i].matches.length; j++) {
                 if(matchName === guesses[i].matches[j].match) {
@@ -35,6 +47,16 @@ export default function Guess(props) {
     //     setDisabled(true)
     // }
 
+    function matchStarted() {
+        if(today === matchDate) {
+            if(currentHour >= matchHour) {
+                setDisabled(true)
+            }
+        }
+    }
+
+    setInterval(matchStarted, 600000)
+
     function sendGuess() {
         setDisabled(true)
         axios.post("https://bolaowc-api.onrender.com/guesses", {username: user.username, matches:[{match: matchName, teamA: {country: props.matchInfo.teamA.country, score: Number(teamAInput)}, teamB:{country: props.matchInfo.teamB.country, score: Number(teamBInput)}}]}, {headers: {username: user.username}})
@@ -45,9 +67,11 @@ export default function Guess(props) {
         })
     }
 
-    if(guessExists === false) {
+    if(guessExists === false && (!today === matchDate && !currentHour >= matchHour)) {
+        if(todayNumber < matchDay && currentMonth === matchMonth) {
         return(
             <MatchContainer>
+                <TimeMobile>{matchInfo.time}</TimeMobile>
                 <Content>
                 <Time>{matchInfo.time}</Time>
                 <TeamsContainer>
@@ -81,8 +105,9 @@ export default function Guess(props) {
                 <Botao disabled={disabled} teamAInput={teamAInput} teamBInput={teamBInput} onClick={sendGuess}>Enviar</Botao>
             </MatchContainer>
         )
+        }
     }
-    if(guessExists === true) {
+    else if(guessExists === true || (today === matchDate && currentHour >= matchHour) || (todayNumber > matchDay && currentMonth >= matchMonth)) {
         
     return(
         <MatchContainer>
@@ -123,6 +148,43 @@ export default function Guess(props) {
             </GuessDiv>
         </MatchContainer>
     )
+    } else {
+return(
+            <MatchContainer>
+                <TimeMobile>{matchInfo.time}</TimeMobile>
+                <Content>
+                <Time>{matchInfo.time}</Time>
+                <TeamsContainer>
+                <TeamADiv>
+                    <p>{matchInfo.teamA.country}</p>
+                    <img src={matchInfo.teamA.flag} />
+                </TeamADiv>
+                <Score>
+                    <p>{matchInfo.teamA.score}</p>
+                </Score>
+                <Vs>X</Vs>
+                <Score>
+                    <p>{matchInfo.teamB.score}</p>
+                </Score>
+                <TeamBDiv>
+                    <img src={matchInfo.teamB.flag} />
+                    <p>{matchInfo.teamB.country}</p>  
+                </TeamBDiv>
+                </TeamsContainer>
+                <Stadium>{matchInfo.stadium}</Stadium>
+                </Content>
+                <GuessDiv>
+                <Palpite>
+                <h2>Palpite:</h2>
+                </Palpite>
+                <ScoreInput type="number" onChange={(e) => setTeamAInput(e.target.value)} value={teamAInput}/>
+                <Vs>X</Vs>
+                <ScoreInput type="number" onChange={(e) => setTeamBInput(e.target.value)} value={teamBInput}/>
+                <TeamBDiv />
+                </GuessDiv>
+                <Botao disabled={disabled} teamAInput={teamAInput} teamBInput={teamBInput} onClick={sendGuess}>Enviar</Botao>
+            </MatchContainer>
+        )
     }
 }
 
@@ -150,7 +212,7 @@ const TeamADiv =styled.div`
     justify-content: flex-end;
     align-items: center;
     gap: 5px;
-    font-size: 16px;
+    font-size: 18px;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     img {
@@ -167,6 +229,7 @@ const Palpite = styled.div`
     align-items: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
+    font-size: 17px;
 `
 const TeamBDiv =styled.div`
     width: 150px;
@@ -177,10 +240,10 @@ const TeamBDiv =styled.div`
     align-items: center;
     gap: 5px;
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     img {
-        width: 22px;
+        width: 23px;
     }
 `
 
@@ -233,7 +296,8 @@ const TimeMobile = styled.p`
     font-weight: 300;
     font-size: 15px;
     display: none;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    margin-top: 25px;
     @media(max-width: 680px) {
         display: block;
     }
@@ -286,4 +350,5 @@ margin-top: 15px;
 border: none;
 color: #fff;
 pointer-events: ${props => (props.disabled === true || (props.teamAInput === "" || props.teamBInput === "")) ? "none" : "all"};
+cursor: pointer;
 `

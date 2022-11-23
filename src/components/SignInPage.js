@@ -112,7 +112,7 @@ const StyledForm = styled.form`
 
 const StyledInput = styled.input`
     width: 370px;
-    height: 40px;
+    height: 45px;
     /* border: solid 2px #908E97; */
     border: none;
     border-radius: 5px;
@@ -134,7 +134,7 @@ const StyledInput = styled.input`
 
 const Botao = styled.button`
     width: 370px;
-    height: 40px;
+    height: 45px;
     /* border: solid 2px #908E97; */
     border: none;
     border-radius: 5px;
