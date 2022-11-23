@@ -186,7 +186,7 @@ font-size: 15px;
 `
 
 const TableLine = styled.div`
-width: 100%;
+width: 90%;
 height: 44px;
 display: flex;
 justify-content: space-between;
