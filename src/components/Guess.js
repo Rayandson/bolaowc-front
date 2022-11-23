@@ -190,13 +190,14 @@ return(
 
 const MatchContainer = styled.div`
     width: 100%;
-    height: 100px;
+    height: auto;
     background-color: #FAFAFA;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    /* background-color: green; */
 `
 
 const Vs = styled.p`

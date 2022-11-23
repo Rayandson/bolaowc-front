@@ -105,7 +105,7 @@ const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 15px;
-     @media(max-width: 385px) {
+     @media(max-width: 450px) {
         width: 85%;
     }
 `
@@ -127,7 +127,7 @@ const StyledInput = styled.input`
             font-weight: 500;
 
         }
-    @media(max-width: 385px) {
+    @media(max-width: 450px) {
         width: 100%;
     }
 `
@@ -157,7 +157,7 @@ const Botao = styled.button`
         align-items: center;
 
     }
-    @media(max-width: 385px) {
+    @media(max-width: 450px) {
         width: 100%;
     }
 `

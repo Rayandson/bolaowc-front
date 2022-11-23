@@ -13,7 +13,7 @@ export default function GuessesContainer(props) {
 
 const Container = styled.div`
     width: 100%;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px; */
 `
