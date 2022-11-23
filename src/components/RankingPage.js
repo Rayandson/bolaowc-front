@@ -58,17 +58,6 @@ export default function RankingPage() {
                     </TableLine>
                         )
                     })}
-                    {ranking.map((user) => {
-                        return(
-                    <TableLine>
-                        <LeftDiv>
-                            <p>{user.pos}</p>
-                            <p>{user.username}</p>
-                        </LeftDiv> 
-                        <p>{user.pts}</p>
-                    </TableLine>
-                        )
-                    })}
                     </RankingContainer>
                     <RulesContainer>
                         <RulesTitle>
