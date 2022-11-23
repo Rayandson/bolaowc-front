@@ -104,6 +104,9 @@ export default function RankingPage() {
                                     <p>0</p>
                                 </Pts>
                             </Rule>
+                            <RulesFooter>
+                            <p>* Jogos do Brasil valem o dobro</p>
+                            </RulesFooter>
                     </RulesContainer>
                 </CentralDiv>
             </Content>
@@ -247,6 +250,17 @@ const Rule = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+`
+
+const RulesFooter = styled.div`
+    width: 100%;
+    height: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
 `
 
 const Description = styled.div`
