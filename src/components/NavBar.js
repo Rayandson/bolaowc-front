@@ -15,6 +15,7 @@ export default function NavBar() {
         navigate(route)
         console.log(typeof(tab))
         setActive(tab)
+        window.scrollTo(0, 0);
     }
 
         return (

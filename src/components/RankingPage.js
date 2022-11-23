@@ -13,6 +13,7 @@ export default function RankingPage() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         axios.get("https://bolaowc-api.onrender.com/ranking", {headers: {username: user?.username}})
         .then((res) => {
             console.log(res.data[0].ranking)

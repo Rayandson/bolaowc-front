@@ -14,6 +14,7 @@ export default function GuessesPage() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         axios.get("https://bolaowc-api.onrender.com/matches", {headers: {username: user?.username}})
         .then((res) => {
             // console.log(res.data.matches.matchesTable)
