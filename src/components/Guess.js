@@ -12,7 +12,6 @@ export default function Guess(props) {
     const matchDay = Number(props.matchInfo.date.slice(0 ,2))
     const currentMonth = Number(dayJsObject.format('MM'))
     const matchMonth = Number(props.matchInfo.date.slice(3))
-    console.log(matchMonth)
     const matchDate = props.matchInfo.date
     const matchHour = Number(props.matchInfo.time.slice(0, 2))
     const matchName = props.matchInfo.match
@@ -26,7 +25,7 @@ export default function Guess(props) {
     const [teamAInput, setTeamAInput] = useState("")
     const [teamBInput, setTeamBInput] = useState("")
     const [disabled, setDisabled] = useState(false)
-    const [pts, setPts] = useState("")
+    // const [pts, setPts] = useState("10 pts")
 
     useEffect(() => {
         matchStarted()
@@ -37,37 +36,41 @@ export default function Guess(props) {
                     setGuessTeamA(guesses[i].matches[j].teamA.score)
                     setGuessTeamB(guesses[i].matches[j].teamB.score)
                     //Acertou placar exato
-                    if(matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score) {
-                        if (matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
-                            setPts("40 pts")
-                        } else {
-                            setPts("20 pts")
-                        }   
-                    } else if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score)) {
-                        if((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
-                            if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
-                                setPts("30 pts")
-                            } else {
-                                setPts("15 pts")
-                            }
-                        }
-                    } else if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score) ||(matchInfo.teamB.score === matchInfo.teamA.score && guesses[i].matches[j].teamB.score === guesses[i].matches[j].teamA.score)) {
-                        if (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) {
-                            if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
-                                setPts("20 pts")
-                            } else {
-                                setPts("10 pts")
-                            }
-                        }
-                    } else if ((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
-                        if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
-                            setPts("10 pts")
-                        } else {
-                            setPts("5 pts")
-                        }
-                    } else if(matchInfo.teamA.score !== "") {
-                        setPts("0 pts")
-                    }
+                    // if(matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score) {
+                    //     if (matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                    //         setPts("40 pts")
+                    //     } else {
+                    //         setPts("20 pts")
+                    //     }   
+                    // } else if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score)) {
+                    //     if((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
+                    //         if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                    //             setPts("30 pts")
+                    //         } else {
+                    //             setPts("15 pts")
+                    //         }
+                    //     }
+                    // } else if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score) ||(matchInfo.teamB.score === matchInfo.teamA.score && guesses[i].matches[j].teamB.score === guesses[i].matches[j].teamA.score)) {
+                
+                    //     if (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) {
+                            
+                    //         if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                    //             setPts("20 pts")
+                    //             console.log("entrou 10 brasil")
+                    //         } else {
+                    //             setPts("10 pts")
+                    //             console.log("entrou 10")
+                    //         }
+                    //     }
+                    // } else if ((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
+                    //     if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                    //         setPts("10 pts")
+                    //     } else {
+                    //         setPts("5 pts")
+                    //     }
+                    // } else if(matchInfo.teamA.score !== "") {
+                    //     setPts("0 pts")
+                    // } 
                 }
             }
         }
@@ -177,7 +180,7 @@ export default function Guess(props) {
                 <p>{guessTeamB}</p>
             </GuessScore>
             <TeamBDiv />
-            <Pts scoreTeamA={matchInfo.teamA.score} scoreTeamB={matchInfo.teamB.score} guessTeamA={guessTeamA} guessTeamB={guessTeamB}>{pts}</Pts>
+            {/* <Pts scoreTeamA={matchInfo.teamA.score} scoreTeamB={matchInfo.teamB.score} guessTeamA={guessTeamA} guessTeamB={guessTeamB}>{pts}</Pts> */}
             </GuessDiv>
         </MatchContainer>
     )
