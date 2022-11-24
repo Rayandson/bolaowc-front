@@ -177,7 +177,7 @@ export default function Guess(props) {
                 <p>{guessTeamB}</p>
             </GuessScore>
             <TeamBDiv />
-            <Pts>{pts}</Pts>
+            <Pts scoreTeamA={matchInfo.teamA.score} scoreTeamB={matchInfo.teamB.score} guessTeamA={guessTeamA} guessTeamB={guessTeamB}>{pts}</Pts>
             </GuessDiv>
         </MatchContainer>
     )
@@ -242,6 +242,7 @@ const Vs = styled.p`
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     color: ${props => (props.scoreTeamA === props.guessTeamA && props.scoreTeamB === props.guessTeamB) ? "green" : "black"};
+    filter: ${props => (props.scoreTeamA === props.guessTeamA && props.scoreTeamB === props.guessTeamB) ? "brightness(1.35)" : "brightness(1)"};
 `
 
 const TeamADiv =styled.div`
@@ -333,6 +334,7 @@ const GuessScore = styled.div`
         font-weight: 500;
         font-size: 20px;
         color: ${props => (props.scoreTeamA === props.guessTeamA && props.scoreTeamB === props.guessTeamB) ? "green" : "black"};
+        filter: ${props => (props.scoreTeamA === props.guessTeamA && props.scoreTeamB === props.guessTeamB) ? "brightness(1.35)" : "brightness(1)"};
     }
 `
 
@@ -415,7 +417,8 @@ font-family: 'Roboto', sans-serif;
 font-weight: 700;
 font-size: 13px;
 position: absolute;
-color: blue;
+color: ${props => (props.scoreTeamA === props.guessTeamA && props.scoreTeamB === props.guessTeamB) ? "green" : "blue"};
+        filter: ${props => (props.scoreTeamA === props.guessTeamA && props.scoreTeamB === props.guessTeamB) ? "brightness(1.35)" : "brightness(1)"};
 right: 20vw;
 @media (max-width: 450px) {
     right: 15vw;
