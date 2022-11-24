@@ -24,7 +24,7 @@ export default function SignInPage() {
         console.log(res.data)
         })
         .catch((err) => {
-            alert(err.message)
+            alert(err.response.data)
             setLoading(false)
         })
         e.preventDefault();
