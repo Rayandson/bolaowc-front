@@ -26,6 +26,7 @@ export default function Guess(props) {
     const [teamAInput, setTeamAInput] = useState("")
     const [teamBInput, setTeamBInput] = useState("")
     const [disabled, setDisabled] = useState(false)
+    const [pts, setPts] = useState("")
 
     useEffect(() => {
         matchStarted()
@@ -35,10 +36,41 @@ export default function Guess(props) {
                     setGuessExists(true)
                     setGuessTeamA(guesses[i].matches[j].teamA.score)
                     setGuessTeamB(guesses[i].matches[j].teamB.score)
+                    //Acertou placar exato
+                    if(matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score) {
+                        if (matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                            setPts("40 pts")
+                        } else {
+                            setPts("20 pts")
+                        }   
+                    } else if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score)) {
+                        if((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
+                            if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                                setPts("30 pts")
+                            } else {
+                                setPts("15 pts")
+                            }
+                        }
+                    } else if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score) ||(matchInfo.teamB.score === matchInfo.teamA.score && guesses[i].matches[j].teamB.score === guesses[i].matches[j].teamA.score)) {
+                        if (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) {
+                            if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                                setPts("20 pts")
+                            } else {
+                                setPts("10 pts")
+                            }
+                        }
+                    } else if ((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
+                        if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                            setPts("10 pts")
+                        } else {
+                            setPts("5 pts")
+                        }
+                    } else if(matchInfo.teamA.score !== "") {
+                        setPts("0 pts")
+                    }
                 }
             }
         }
-    
     }, [])
 
     // setInterval(desativaBotao, 100000)
@@ -145,6 +177,7 @@ export default function Guess(props) {
                 <p>{guessTeamB}</p>
             </GuessScore>
             <TeamBDiv />
+            <Pts>{pts}</Pts>
             </GuessDiv>
         </MatchContainer>
     )
@@ -178,7 +211,7 @@ return(
                 <h2>Palpite:</h2>
                 </Palpite>
                 <ScoreInput type="number" onChange={(e) => setTeamAInput(e.target.value)} value={teamAInput}/>
-                <Vs>X</Vs>
+                <VsMatch>X</VsMatch>
                 <ScoreInput type="number" onChange={(e) => setTeamBInput(e.target.value)} value={teamBInput}/>
                 <TeamBDiv />
                 </GuessDiv>
@@ -196,7 +229,7 @@ const MatchContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     /* background-color: green; */
 `
 const VsMatch = styled.p`
@@ -345,6 +378,7 @@ const GuessDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 `
 
 const ScoreInput = styled.input`
@@ -374,4 +408,16 @@ border: none;
 color: #fff;
 pointer-events: ${props => (props.disabled === true || (props.teamAInput === "" || props.teamBInput === "")) ? "none" : "all"};
 cursor: pointer;
+`
+
+const Pts = styled.p`
+font-family: 'Roboto', sans-serif;
+font-weight: 700;
+font-size: 13px;
+position: absolute;
+color: blue;
+right: 20vw;
+@media (max-width: 450px) {
+    right: 15vw;
+}
 `
