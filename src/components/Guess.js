@@ -82,7 +82,7 @@ export default function Guess(props) {
                 <Score>
                     <p>{matchInfo.teamA.score}</p>
                 </Score>
-                <Vs>X</Vs>
+                <VsMatch>X</VsMatch>
                 <Score>
                     <p>{matchInfo.teamB.score}</p>
                 </Score>
@@ -122,7 +122,7 @@ export default function Guess(props) {
             <Score>
                 <p>{matchInfo.teamA.score}</p>
             </Score>
-            <Vs>X</Vs>
+            <VsMatch>X</VsMatch>
             <Score>
                 <p>{matchInfo.teamB.score}</p>
             </Score>
@@ -137,13 +137,13 @@ export default function Guess(props) {
             <Palpite>
             <h2>Palpite:</h2>
             </Palpite>
-            <Score>
+            <GuessScore scoreTeamA={matchInfo.teamA.score} scoreTeamB={matchInfo.teamB.score} guessTeamA={guessTeamA} guessTeamB={guessTeamB}>
                 <p>{guessTeamA}</p>
-            </Score>
-            <Vs>X</Vs>
-            <Score>
+            </GuessScore>
+            <Vs scoreTeamA={matchInfo.teamA.score} scoreTeamB={matchInfo.teamB.score} guessTeamA={guessTeamA} guessTeamB={guessTeamB}>X</Vs>
+            <GuessScore scoreTeamA={matchInfo.teamA.score} scoreTeamB={matchInfo.teamB.score} guessTeamA={guessTeamA} guessTeamB={guessTeamB}>
                 <p>{guessTeamB}</p>
-            </Score>
+            </GuessScore>
             <TeamBDiv />
             </GuessDiv>
         </MatchContainer>
@@ -162,7 +162,7 @@ return(
                 <Score>
                     <p>{matchInfo.teamA.score}</p>
                 </Score>
-                <Vs>X</Vs>
+                <VsMatch>X</VsMatch>
                 <Score>
                     <p>{matchInfo.teamB.score}</p>
                 </Score>
@@ -199,10 +199,16 @@ const MatchContainer = styled.div`
     margin-bottom: 20px;
     /* background-color: green; */
 `
+const VsMatch = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: "black"
+`
 
 const Vs = styled.p`
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
+    color: ${props => (props.scoreTeamA === props.guessTeamA && props.scoreTeamB === props.guessTeamB) ? "green" : "black"};
 `
 
 const TeamADiv =styled.div`
@@ -278,6 +284,22 @@ const Score = styled.div`
         font-family: 'Roboto', sans-serif;
         font-weight: 500;
         font-size: 20px;
+    }
+`
+
+const GuessScore = styled.div`
+    width: 25px;
+    height: 25px;
+    background-color: #FAFAFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    p {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        color: ${props => (props.scoreTeamA === props.guessTeamA && props.scoreTeamB === props.guessTeamB) ? "green" : "black"};
     }
 `
 
