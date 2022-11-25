@@ -15,7 +15,6 @@ export default function Guess(props) {
     const matchDate = props.matchInfo.date
     const matchHour = Number(props.matchInfo.time.slice(0, 2))
     const matchName = props.matchInfo.match
-    // console.log(props.matchInfo)
     const matchInfo = props.matchInfo
     const guesses = props.guesses
     const {user} = useContext(UserContext)
@@ -25,7 +24,7 @@ export default function Guess(props) {
     const [teamAInput, setTeamAInput] = useState("")
     const [teamBInput, setTeamBInput] = useState("")
     const [disabled, setDisabled] = useState(false)
-    // const [pts, setPts] = useState("10 pts")
+    const [pts, setPts] = useState("")
 
     useEffect(() => {
         matchStarted()
@@ -35,52 +34,48 @@ export default function Guess(props) {
                     setGuessExists(true)
                     setGuessTeamA(guesses[i].matches[j].teamA.score)
                     setGuessTeamB(guesses[i].matches[j].teamB.score)
-                    //Acertou placar exato
-                    // if(matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score) {
-                    //     if (matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
-                    //         setPts("40 pts")
-                    //     } else {
-                    //         setPts("20 pts")
-                    //     }   
-                    // } else if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score)) {
-                    //     if((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
-                    //         if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
-                    //             setPts("30 pts")
-                    //         } else {
-                    //             setPts("15 pts")
-                    //         }
-                    //     }
-                    // } else if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score) ||(matchInfo.teamB.score === matchInfo.teamA.score && guesses[i].matches[j].teamB.score === guesses[i].matches[j].teamA.score)) {
-                
-                    //     if (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) {
+                    
+                    if(matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score) {
+                        if (matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                            setPts("40 pts")
+                            break;
+                        } else {
+                            setPts("20 pts")
+                            break;
+                        }   
+                    }  if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score)) {
+                        if((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
+                            if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                                setPts("30 pts")
+                                break;
+                            } else {
+                                setPts("15 pts")
+                                break;
+                            }
+                        }
+                    } if ((matchInfo.teamA.score > matchInfo.teamB.score && guesses[i].matches[j].teamA.score > guesses[i].matches[j].teamB.score) || (matchInfo.teamB.score > matchInfo.teamA.score && guesses[i].matches[j].teamB.score > guesses[i].matches[j].teamA.score) ||((matchInfo.teamB.score !== "" && guesses[i].matches[j].teamB.score !== "") && (matchInfo.teamB.score === matchInfo.teamA.score && guesses[i].matches[j].teamB.score === guesses[i].matches[j].teamA.score))) {
+
+                        if (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) {
                             
-                    //         if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
-                    //             setPts("20 pts")
-                    //             console.log("entrou 10 brasil")
-                    //         } else {
-                    //             setPts("10 pts")
-                    //             console.log("entrou 10")
-                    //         }
-                    //     }
-                    // } else if ((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
-                    //     if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
-                    //         setPts("10 pts")
-                    //     } else {
-                    //         setPts("5 pts")
-                    //     }
-                    // } else if(matchInfo.teamA.score !== "") {
-                    //     setPts("0 pts")
-                    // } 
+                            if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                                setPts("20 pts")
+                            } else {
+                                setPts("10 pts")
+                            }
+                        }
+                    } else if ((matchInfo.teamA.score === guesses[i].matches[j].teamA.score && matchInfo.teamB.score !== guesses[i].matches[j].teamB.score) || (matchInfo.teamA.score !== guesses[i].matches[j].teamA.score && matchInfo.teamB.score === guesses[i].matches[j].teamB.score)) {
+                        if(matchInfo.teamA.country === "Brasil" || matchInfo.teamB.country === "Brasil") {
+                            setPts("10 pts")
+                        } else {
+                            setPts("5 pts")
+                        }
+                    } else if(matchInfo.teamA.score !== "") {
+                        setPts("0 pts")
+                    } 
                 }
             }
         }
     }, [])
-
-    // setInterval(desativaBotao, 100000)
-
-    // function desativaBotao() {
-    //     setDisabled(true)
-    // }
 
     function matchStarted() {
         if(today === matchDate) {
@@ -180,7 +175,7 @@ export default function Guess(props) {
                 <p>{guessTeamB}</p>
             </GuessScore>
             <TeamBDiv />
-            {/* <Pts scoreTeamA={matchInfo.teamA.score} scoreTeamB={matchInfo.teamB.score} guessTeamA={guessTeamA} guessTeamB={guessTeamB}>{pts}</Pts> */}
+            <Pts scoreTeamA={matchInfo.teamA.score} scoreTeamB={matchInfo.teamB.score} guessTeamA={guessTeamA} guessTeamB={guessTeamB}>{pts}</Pts>
             </GuessDiv>
         </MatchContainer>
     )
@@ -233,7 +228,6 @@ const MatchContainer = styled.div`
     justify-content: space-around;
     align-items: center;
     margin-bottom: 30px;
-    /* background-color: green; */
 `
 const VsMatch = styled.p`
     font-family: 'Roboto', sans-serif;
@@ -251,7 +245,6 @@ const Vs = styled.p`
 const TeamADiv =styled.div`
     width: 150px;
     height: 30px;
-    /* background-color: orange; */
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -278,7 +271,6 @@ const Palpite = styled.div`
 const TeamBDiv =styled.div`
     width: 150px;
     height: 30px;
-    /* background-color: orange; */
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -379,7 +371,6 @@ const Stadium = styled.p`
 const GuessDiv = styled.div`
     width: 95%;
     height: 30px;
-    /* background-color: red; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -406,7 +397,6 @@ const Botao = styled.button`
 width: 60px;
 height: 25px;
 border-radius: 5px;
-/* background-color: purple; */
 background-color:  ${props => (props.disabled === false) ? "purple" : "grey"};
 margin-top: 15px;
 border: none;
