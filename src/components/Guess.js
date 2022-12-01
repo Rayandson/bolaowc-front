@@ -137,7 +137,7 @@ export default function Guess(props) {
         )
         }
     }
-    else if(guessExists === true || (today === matchDate && currentHour >= matchHour) || (todayNumber > matchDay && currentMonth >= matchMonth)) {
+    else if(guessExists === true || (today === matchDate && currentHour >= matchHour) || (todayNumber > matchDay && currentMonth >= matchMonth) || ( currentMonth > matchMonth)) {
         
     return(
         <MatchContainer>
