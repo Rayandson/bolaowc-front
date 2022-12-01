@@ -89,7 +89,7 @@ export default function Guess(props) {
 
     function sendGuess() {
         setDisabled(true)
-        axios.post("https://bolaowc-api.onrender.com/guesses", {username: user.username, matches:[{match: matchName, teamA: {country: props.matchInfo.teamA.country, score: Number(teamAInput)}, teamB:{country: props.matchInfo.teamB.country, score: Number(teamBInput)}}]}, {headers: {username: user.username}})
+        axios.post("https://bolaowc-api.onrender.com/guesses", {username: user.username, matchMonth: matchMonth, matches:[{match: matchName, teamA: {country: props.matchInfo.teamA.country, score: Number(teamAInput)}, teamB:{country: props.matchInfo.teamB.country, score: Number(teamBInput)}}]}, {headers: {username: user.username}})
         .then((res) => {
             console.log(res.data)
         }).catch((e) => {
