@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { URL } from "../assets/URL";
 import { UserContext } from "../contexts/UserContext";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
@@ -14,7 +15,7 @@ export default function RankingPage() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        axios.get("https://bolaowc-api.onrender.com/ranking", {headers: {username: user?.username}})
+        axios.get(`${URL}/ranking`, {headers: {username: user?.username}})
         .then((res) => {
             console.log(res.data[0].ranking)
             setranking(res.data[0].ranking)

@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { ThreeDots  } from  'react-loader-spinner'
+import { URL } from "../assets/URL"
 
 export default function SignUpPage() {
     const [name, setName] = useState("")
@@ -14,7 +15,7 @@ export default function SignUpPage() {
 
     function signUp(e) {
         setLoading(true)
-        axios.post("https://bolaowc-api.onrender.com/sign-up", {name, username, email, password})
+        axios.post(`${URL}/sign-up`, {name, username, email, password})
         .then((res) => {
         console.log(res)
         navigate("/")

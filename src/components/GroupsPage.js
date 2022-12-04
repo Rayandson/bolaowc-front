@@ -7,6 +7,7 @@ import { UserContext } from "../contexts/UserContext"
 import axios from "axios";
 import { Link, useNavigate} from "react-router-dom";
 import Footer from "./Footer";
+import { URL } from "../assets/URL";
 
 export default function GroupsPage() {
     const [groups, setGroups] = useState(undefined)
@@ -18,7 +19,7 @@ export default function GroupsPage() {
         if(!user) {
             navigate("/")
         }
-        axios.get("https://bolaowc-api.onrender.com/groups", {headers: {username: user?.username}})
+        axios.get(`${URL}/groups`, {headers: {username: user?.username}})
         .then((res) => {
             setGroups(res.data)
         })

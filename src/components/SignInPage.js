@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { UserContext } from "../contexts/UserContext"
 import { ThreeDots  } from  'react-loader-spinner'
+import { URL } from "../assets/URL"
 
 export default function SignInPage() {
 
@@ -15,7 +16,7 @@ export default function SignInPage() {
 
     function signIn(e) {
         setLoading(true)
-        axios.post("https://bolaowc-api.onrender.com/sign-in", {username, password})
+        axios.post(`${URL}/sign-in`, {username, password})
         .then((res) => {
         navigate("/guesses")
         setUsername("")

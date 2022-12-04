@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { URL } from "../assets/URL";
 import { UserContext } from "../contexts/UserContext";
 import Footer from "./Footer";
 import GuessesContainer from "./GuessesContainer";
@@ -15,7 +16,7 @@ export default function GuessesPage() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        axios.get("https://bolaowc-api.onrender.com/matches", {headers: {username: user?.username}})
+        axios.get(`${URL}/matches`, {headers: {username: user?.username}})
         .then((res) => {
             // console.log(res.data.matches.matchesTable)
             setMatches(res.data.matches.matchesTable)
