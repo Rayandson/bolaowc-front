@@ -17,7 +17,6 @@ export default function RankingPage() {
         window.scrollTo(0, 0);
         axios.get(`${URL}/ranking`, {headers: {username: user?.username}})
         .then((res) => {
-            console.log(res.data[0].ranking)
             setranking(res.data[0].ranking)
         }).catch ((e) => {
             alert(e.message)
@@ -46,8 +45,11 @@ export default function RankingPage() {
                         <LeftDiv>
                             <p>Pos</p>
                             <p>Usuário</p>
-                        </LeftDiv> 
+                        </LeftDiv>
+                        <RightDiv>
+                        <p>Acts</p>
                         <p>Pts</p>
+                        </RightDiv> 
                     </TableHeader>
                     {ranking.map((user) => {
                         return(
@@ -55,8 +57,11 @@ export default function RankingPage() {
                         <LeftDiv>
                             <p>{user.pos}</p>
                             <p>{user.username}</p>
-                        </LeftDiv> 
+                        </LeftDiv>
+                        <RightDiv>
+                        <p>{user.rightGuesses}</p>
                         <p>{user.pts}</p>
+                        </RightDiv>
                     </TableLine>
                         )
                     })}
@@ -219,6 +224,15 @@ const LeftDiv = styled.div`
     align-items: center;
     gap: 35px;
 
+`
+
+const RightDiv = styled.div`
+    width: auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 45px;
 `
 
 const RulesContainer = styled.div`

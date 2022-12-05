@@ -13,7 +13,6 @@ export default function NavBar() {
 
     function redirect(route, tab) {
         navigate(route)
-        console.log(typeof(tab))
         setActive(tab)
         window.scrollTo(0, 0);
     }

@@ -17,7 +17,6 @@ export default function SignUpPage() {
         setLoading(true)
         axios.post(`${URL}/sign-up`, {name, username, email, password})
         .then((res) => {
-        console.log(res)
         navigate("/")
         setName("")
         setUsername("")

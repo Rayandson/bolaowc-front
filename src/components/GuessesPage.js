@@ -18,11 +18,9 @@ export default function GuessesPage() {
         window.scrollTo(0, 0);
         axios.get(`${URL}/matches`, {headers: {username: user?.username}})
         .then((res) => {
-            // console.log(res.data.matches.matchesTable)
             setMatches(res.data.matches.matchesTable)
             setguesses(res.data.guesses)  
         }).catch ((err) => {
-            // alert(err.message)
             navigate("/")
         })
     }, [])

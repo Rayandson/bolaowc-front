@@ -22,7 +22,6 @@ export default function SignInPage() {
         setUsername("")
         setPassword("")
         setUser(res.data)
-        console.log(res.data)
         })
         .catch((err) => {
             alert(err.response.data)
